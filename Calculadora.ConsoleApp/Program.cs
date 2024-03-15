@@ -1,199 +1,259 @@
-﻿using System.ComponentModel.Design;
+﻿using Microsoft.VisualBasic;
+using System.ComponentModel.Design;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Calculadora.ConsoleApp
 {
     internal class Program
     {
+        static string opm = "";
+        static int qdn;
+        static string opsm = "";
+        static int aux = 0;
+        static decimal aux2 = 0;
+        static decimal cont = 0;
+        static decimal aux3 = 0;
+
         static void Main(string[] args)
         {
-        menu:
-            string primerionumero = "";
-            int opm, qdn;
-            int aux = 0;
-            decimal aux2 = 0;
-            decimal cont = 0;
-            decimal aux3 = 0;
-
-        
-            Console.Clear();
-            Console.WriteLine("Calculadora desafio 1 ----- Escolha uma das opções do menu");
-            Console.WriteLine("1. Soma");
-            Console.WriteLine("2. Subtração");
-            Console.WriteLine("3. Divisão");
-            Console.WriteLine("4. Multiplicação");
-            Console.WriteLine("5. Sair");
-            opm = Convert.ToInt32(Console.ReadLine());
-
-            if (opm < 1 || opm > 5)
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            while (true)
             {
-                Console.WriteLine("Opção inválida, escolha uma opção válida entre 1 a 5, precione qualquer tecla para continuar.");
-                Console.ReadLine();
-                goto menu;
-            }
+                while (opm != "5")
+                {
+                    Menu();
+                    switch (opm)
+                    {
+                        case "1":
+                            Caso1();
+                            break;
 
-            else if (opm == 1)
+                        case "2":
+                            Caso2();
+                            break;
+
+                        case "3":
+                            Caso3();
+                            break;
+
+                        case "4":
+                            Caso4();
+                            break;
+
+                        case "5":
+                            Exit();
+                            break;
+                    }
+                }
+                break;
+            }  
+        }
+
+
+        private static void Menu()
+        {
+            Console.Clear();
+            Console.WriteLine("############################################################################");
+            Console.WriteLine("###                                                                      ###");
+            Console.WriteLine("###       Academia do programador 2024 - Exercício 1 - Calculadora       ###");
+            Console.WriteLine("### 1. Soma                                                              ###");
+            Console.WriteLine("### 2. Subtração                                                         ###");
+            Console.WriteLine("### 3. Divisão                                                           ###");
+            Console.WriteLine("### 4. Multiplicação                                                     ###");
+            Console.WriteLine("### 5. Sair                                                              ###");
+            Console.WriteLine("###                                                                      ###");
+            Console.WriteLine("############################################################################");
+            Console.Write("\nDigite sua opção: ");
+            opm = Console.ReadLine();
+
+                if (opm != "1" && opm != "2" && opm != "3" && opm != "4" && opm != "5")
+                {
+                    Console.WriteLine("\nOpção inválida, escolha uma opção válida entre 1 a 5. \n\nPrecione qualquer tecla para continuar.\n");
+                    Console.ReadLine();
+                    Console.Clear();
+                    Menu();
+                }
+        }
+
+        private static void Caso1()
+        {
+            while (true) 
             {
                 Console.Clear();
-                Console.WriteLine("Quantos numeros irá somar?");
+                aux = 0;
+                Console.WriteLine("############################################################################");
+                Console.WriteLine("###                                                                      ###");
+                Console.WriteLine("###       Academia do programador 2024 - Exercício 1 - Calculadora       ###");
+                Console.WriteLine("###                                 Soma                                 ###");
+                Console.WriteLine("###                                                                      ###");
+                Console.WriteLine("############################################################################");
+                Console.Write("\nQuantos numeros irá somar? ");
                 qdn = Convert.ToInt32(Console.ReadLine());
+
+                if (qdn == 0 || qdn == 1)
+                {
+                    Console.WriteLine("\nÉ necessário pelo menos 2 numeros para haver uma soma. Por favor, corrija a quantidade de numeros e tente novamente. \n\nPrecione qualquer tecla para continuar.\n");
+                    Console.ReadLine();
+                    continue;
+                }
+
                 while (aux < qdn)
                 {
                     aux++;
-                    Console.WriteLine($"Digite o valor da {aux} conta");
+                    Console.Write($"\nDigite o valor da {aux}ª conta: ");
                     aux2 = Convert.ToDecimal(Console.ReadLine());
                     cont = aux2 + cont;
                 }
-                Console.WriteLine("O total somado foi de " + cont);
 
-            retornosoma:
-                Console.WriteLine("Deseja retorar ao menu ou sair?");
-                Console.WriteLine("1. Menu");
-                Console.WriteLine("2. Sair");
-                opm = Convert.ToInt32(Console.ReadLine());
-
-                if (opm < 1 || opm > 2)
-                {
-                    Console.WriteLine("Opção inválida, escolha uma opção válida entre 1 e 2");
-                    Console.ReadLine();
-                    goto retornosoma;
-                }
-
-                else if (opm == 1)
-                {
-                    goto menu;
-                }
-
-                else if (opm == 2)
-                {
-                    goto exit;
-                }
+                Console.WriteLine($"\nO total somado foi de {cont}. \n\nPrecione qualquer tecla para continuar.\n");
+                Console.ReadLine();
+                break;
             }
+        }
 
-            else if (opm == 2)
+        private static void Caso2()
+        {
+            while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Quantos numeros irá subtrair?");
+                aux = 0;
+                aux3 = 0;
+                cont = 0;
+                Console.WriteLine("############################################################################");
+                Console.WriteLine("###                                                                      ###");
+                Console.WriteLine("###       Academia do programador 2024 - Exercício 1 - Calculadora       ###");
+                Console.WriteLine("###                               Subtração                              ###");
+                Console.WriteLine("###                                                                      ###");
+                Console.WriteLine("############################################################################");
+                Console.Write("\nQuantos numeros irá subtrair? ");
                 qdn = Convert.ToInt32(Console.ReadLine());
+
+                if (qdn == 0 || qdn == 1)
+                {
+                    Console.WriteLine("\nÉ necessário pelo menos 2 numeros para haver uma subtração. Por favor, corrija a quantidade de numeros e tente novamente. \n\nPrecione qualquer tecla para continuar.\n");
+                    Console.ReadLine();
+                    continue;
+                }
+
                 while (aux < qdn)
                 {
                     aux++;
-                    Console.WriteLine($"Digite o valor da {aux} conta");
+                    Console.Write($"\nDigite o valor da {aux}ª conta: ");
                     aux2 = Convert.ToDecimal(Console.ReadLine());
-                    cont = aux2 - cont;
-                }
-                Console.WriteLine("O total subtraido foi de " + cont);
-
-            retornosub:
-                Console.WriteLine("Deseja retorar ao menu ou sair?");
-                Console.WriteLine("1. Menu");
-                Console.WriteLine("2. Sair");
-                opm = Convert.ToInt32(Console.ReadLine());
-
-                if (opm < 1 || opm > 2)
-                {
-                    Console.WriteLine("Opção inválida, escolha uma opção válida entre 1 e 2");
-                    Console.ReadLine();
-                    goto retornosub;
+                    cont = cont - aux2;
+                    while (aux == 1)
+                    {
+                        aux++;
+                        Console.Write($"\nDigite o valor da {aux}ª conta: ");
+                        aux3 = Convert.ToDecimal(Console.ReadLine());
+                        cont = aux2 - aux3;
+                    }
                 }
 
-                else if (opm == 1)
-                {
-                    goto menu;
-                }
-
-                else if (opm == 2)
-                {
-                    goto exit;
-                }
+                Console.WriteLine($"\nO total subtraido foi de {cont}. \n\nPrecione qualquer tecla para continuar.\n");
+                Console.ReadLine();
+                break;
             }
+            
 
-            else if (opm == 3)
+        }
+
+        private static void Caso3()
+        {
+            while (true)
             {
                 Console.Clear();
-            divisaoi:
-                Console.WriteLine("Somente dois numeros podem se dividir entre si");
-                Console.WriteLine("Digite o valor do dividendo");
+                Console.WriteLine("############################################################################");
+                Console.WriteLine("###                                                                      ###");
+                Console.WriteLine("###       Academia do programador 2024 - Exercício 1 - Calculadora       ###");
+                Console.WriteLine("###                                Divisão                               ###");
+                Console.WriteLine("###            Somente dois numeros podem se dividir entre si            ###");
+                Console.WriteLine("###                                                                      ###");
+                Console.WriteLine("############################################################################");
+                Console.Write("\nDigite o valor do dividendo: ");
                 aux2 = Convert.ToDecimal(Console.ReadLine());
-                if(aux2 == 0)
+
+                if (aux2 == 0)
                 {
-                    Console.WriteLine("Não é possivel dividir um numero por zero, por favor escolha outro numero");
-                    goto divisaoi;
+                    Console.WriteLine("\nNão é possivel dividir um numero por zero, por favor escolha outro numero. \n\nPrecione qualquer tecla para continuar.\n");
+                    Console.ReadLine();
+                    Console.Clear();
+                    continue;
                 }
-                Console.WriteLine("Digite o valor do divisor");
+
+                Console.Write("\nDigite o valor do divisor: ");
                 aux3 = Convert.ToDecimal(Console.ReadLine());
+
                 if (aux3 == 0)
                 {
-                    Console.WriteLine("Não é possivel dividir um numero por zero, por favor escolha outro numero");
-                    goto divisaoi;
-                }
-                cont = aux2 / aux3;
-                Console.WriteLine("O total dividido foi de " + cont);
-
-            retornodivi:
-                Console.WriteLine("Deseja retorar ao menu ou sair?");
-                Console.WriteLine("1. Menu");
-                Console.WriteLine("2. Sair");
-                opm = Convert.ToInt32(Console.ReadLine());
-
-                if (opm < 1 || opm > 2)
-                {
-                    Console.WriteLine("Opção inválida, escolha uma opção válida entre 1 e 2");
+                    Console.WriteLine("\nNão é possivel dividir um numero por zero, por favor escolha outro numero. \n\nPrecione qualquer tecla para continuar.\n");
                     Console.ReadLine();
-                    goto retornodivi;
+                    Console.Clear();
+                    continue;
                 }
 
-                else if (opm == 1)
-                {
-                    goto menu;
-                }
-
-                else if (opm == 2)
-                {
-                    goto exit;
-                }
+                cont = aux2 / aux3;
+                Console.WriteLine($"\nO total dividido foi de {cont}. \n\nPrecione qualquer tecla para continuar.\n");
+                Console.ReadLine();
+                break;
             }
+        }
 
-            else if (opm == 4)
+        private static void Caso4()
+        {
+            while(true)
             {
                 Console.Clear();
-                Console.WriteLine("Quantos numeros irá multiplicar?");
-                qdn = Convert.ToInt32(Console.ReadLine());
+                aux = 0;
                 cont = 1;
+                Console.WriteLine("############################################################################");
+                Console.WriteLine("###                                                                      ###");
+                Console.WriteLine("###       Academia do programador 2024 - Exercício 1 - Calculadora       ###");
+                Console.WriteLine("###                              Multiplicação                           ###");
+                Console.WriteLine("###                                                                      ###");
+                Console.WriteLine("############################################################################");
+                Console.Write("\nQuantos numeros irá multiplicar? ");
+                qdn = Convert.ToInt32(Console.ReadLine());
+
+                if (qdn == 0 || qdn == 1)
+                {
+                    Console.WriteLine("\nÉ necessário pelo menos 2 numeros para haver uma multiplicação. Por favor, corrija a quantidade de numeros e tente novamente. \n\nPrecione qualquer tecla para continuar.\n");
+                    Console.ReadLine();
+                    continue;
+                }
+
                 while (aux < qdn)
                 {
                     aux++;
-                    Console.WriteLine($"Digite o valor da {aux} conta");
+                    Console.Write($"\nDigite o valor da {aux}ª conta: ");
                     aux2 = Convert.ToDecimal(Console.ReadLine());
+                    if (aux2 == 0)
+                    {
+                        Console.WriteLine("\nNão é possivel multiplicar um numero por zero, pois todo numero multiplicado por 0 é igual a 0, por favor escolha outro numero. \n\nPrecione qualquer tecla para continuar.\n");
+                        Console.ReadLine();
+                        Console.Clear();
+                        continue;
+                    }
                     cont = aux2 * cont;
                 }
-                Console.WriteLine("O total multiplicado foi de " + cont);
 
-            retornomulti:
-                Console.WriteLine("Deseja retorar ao menu ou sair?");
-                Console.WriteLine("1. Menu");
-                Console.WriteLine("2. Sair");
-                opm = Convert.ToInt32(Console.ReadLine());
-
-                if (opm < 1 || opm > 2)
-                {
-                    Console.WriteLine("Opção inválida, escolha uma opção válida entre 1 e 2");
-                    Console.ReadLine();
-                    goto retornomulti;
-                }
-
-                else if (opm == 1)
-                {
-                    goto menu;
-                }
-
-                else if (opm == 2)
-                {
-                    goto exit;
-                }
+                Console.WriteLine($"\nO total multiplicado foi de {cont}. \n\nPrecione qualquer tecla para continuar.\n");
+                Console.ReadLine();
+                break;
             }
-
-        exit:
-            Console.WriteLine("Até mais. Precione qualquer tecla para sair.");
+        }
+                
+        private static void Exit()
+        {
+            opm = "5";
+            Console.Clear();
+            Console.WriteLine("############################################################################");
+            Console.WriteLine("###                                                                      ###");
+            Console.WriteLine("###       Academia do programador 2024 - Exercício 1 - Calculadora       ###");
+            Console.WriteLine("###                                 Saída                                ###");
+            Console.WriteLine("###             Até mais. Precione qualquer tecla para sair.             ###");
+            Console.WriteLine("###                                                                      ###");
+            Console.WriteLine("############################################################################");
             Console.ReadLine();
         }
     }
